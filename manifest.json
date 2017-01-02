@@ -1,0 +1,30 @@
+{
+  "manifest_version": 2,
+
+  "name": "ModifyUserAgent",
+  "description": "该扩展可以很方便地修改HTTP头中的User-Agent属性 , 内置了各种设备的User-Agent属性的默认值 , 让你可以轻松模拟各种设备",
+  "version": "1.0",
+
+  "browser_action": {
+    "default_icon": "img/icon.png",
+    "default_popup": "html/popup.html",
+    "default_title": "Hello world!"
+  },
+
+        "permissions": [
+		"<all_urls>","webRequest","webRequestBlocking"
+        ],
+
+  "content_scripts":[
+    {
+      "matches":["<all_urls>"],
+      "js":["js/debug.js"]
+    }
+  ],
+
+  "background": {
+    "scripts": ["js/modifyUserAgent.js"],
+    "persistent": true
+  }
+
+}
