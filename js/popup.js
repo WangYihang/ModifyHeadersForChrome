@@ -36,9 +36,15 @@ function clearInput() {
   button_value.value = "";
 }
 
-function clearAllConfig() {
+function clearAllHeaders() {
   chrome.storage.StorageArea.clear(function(){
     console.log("所有键值对都被清除!");
+  });
+}
+
+function removeHeader(key) {
+  chrome.storage.StorageArea.remove(key, function(){
+    console.log("键值对", key, "被清除!");
   });
 }
 
