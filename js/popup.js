@@ -36,6 +36,12 @@ function clearInput() {
   button_value.value = "";
 }
 
+function clearAllConfig() {
+  chrome.storage.StorageArea.clear(function(){
+    console.log("所有键值对都被清除!");
+  });
+}
+
 initView();
 var submit = document.getElementById("button_submit");
 submit.addEventListener("click", function(){
