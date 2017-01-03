@@ -7,21 +7,20 @@ chrome.webRequest.onBeforeSendHeaders.addListener(function(details){
   // makes no guarantee about the contents/order of this array,
   // you'll have to iterate through it to find for the
   // 'User-Agent' element
-  for( var i = 0, l = headers.length; i < l; ++i ) {
- /*   switch headers[i].name:
-      "User-Agent":
-   */    // alert(headers[i].value)
+  console.log("aaa1")
 
-/*
-    if( headers[i].name == 'User-Agent' ) {
-      headers[i].value = '127.0.0.1';
-      console.log(headers[i].value);
-      break;
+  chrome.storage.local.get(null, function(results) {
+    for(var result in results){
+      console.log("获取 : ", result, " -> ", results[result]); 
+      headers.push({"name":result, "value":results[result]});
     }
-*/
-    // If you want to modify other headers, this is the place to
-    // do it. Either remove the 'break;' statement and add in more
-    // conditionals or use a 'switch' statement on 'headers[i].name'
+  });
+
+  console.log("aaa2")
+
+
+  for( var i = 0, l = headers.length; i < l; ++i ) {
+    console.log(headers[i].name, headers[i].value);
   }
 
   blockingResponse.requestHeaders = headers;

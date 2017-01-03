@@ -102,3 +102,51 @@ var submit = document.getElementById("button_clear");
 submit.addEventListener("click", function(){
   clearAllHeaders();
 });
+
+
+// var aaa = "hahahahah";
+// console.log("aaa");
+// //添加修改逻辑
+// chrome.webRequest.onBeforeSendHeaders.addListener(function(details){
+//   //console.log(JSON.stringify(details));
+//   var headers = details.requestHeaders,
+//   blockingResponse = {};
+
+//   // Each header parameter is stored in an array. Since Chrome
+//   // makes no guarantee about the contents/order of this array,
+//   // you'll have to iterate through it to find for the
+//   // 'User-Agent' element
+
+
+//   chrome.storage.local.get(null, function(results) {
+//     for(var result in results){
+//       headers[result] = results[result];
+//       // console.log("获取 : ", result, " -> ", results[result]); 
+//       // addHeadersToHTML(result, results[result]);
+//     }
+//     // var deleteHeaders = document.getElementsByClassName("deleteHeader");
+//     // row_number = deleteHeaders.length
+//     // for(var i = 0; i < row_number; i++){
+//     //   deleteHeaders[i].onclick = function(){
+//     //     id_number = parseInt(this.getAttribute("id"));
+//     //     deleteTableRow(id_number);
+//     //   };
+//     // }
+//   });
+
+//   // for( var i = 0, l = headers.length; i < l; ++i ) {
+//   //   if( headers[i].name == 'User-Agent' ) {
+//   //     headers[i].value = '>>> Your new user agent string here <<<';
+//   //     console.log(headers[i].value);
+//   //     break;
+//   //   }
+//   //   // If you want to modify other headers, this is the place to
+//   //   // do it. Either remove the 'break;' statement and add in more
+//   //   // conditionals or use a 'switch' statement on 'headers[i].name'
+//   // }
+
+//   blockingResponse.requestHeaders = headers;
+//   return blockingResponse;
+// },
+// {urls: [ "<all_urls>" ]},['requestHeaders','blocking']);
+// console.log("aaa");
