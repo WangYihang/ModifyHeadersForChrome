@@ -27,6 +27,9 @@ function addHeadersToHTML(key, value) {
   //插入值
   table.rows[row_number].insertCell(1);
   table.rows[row_number].cells[1].innerHTML = value;
+  //插入操作
+  table.rows[row_number].insertCell(2);
+  table.rows[row_number].cells[2].innerHTML = "<input type=\"submit\" value=\"删除\"/>";
 }
 
 function clearInput() {
