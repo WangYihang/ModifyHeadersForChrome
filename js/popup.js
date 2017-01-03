@@ -9,12 +9,21 @@ function saveUserConfig(key, value) {
 }
 
 function initView() {
+  clearTable();
   chrome.storage.local.get(null, function(results) {
     for(var result in results){
-      console.log("获取 : ", result, " -> ", results[result]);
+      console.log("获取 : ", result, " -> ", results[result]); 
       addHeadersToHTML(result, results[result]);
     } 
   });
+}
+
+function clearTable() {
+  var table = document.getElementById("table_result"); //获得表格
+  var trs = table.getElementsByTagName("tr");
+  for(var i = trs.length - 1; i > 0; i--) {
+    table.deleteRow(i);
+  }
 }
 
 function addHeadersToHTML(key, value) {
@@ -40,13 +49,14 @@ function clearInput() {
 }
 
 function clearAllHeaders() {
-  chrome.storage.StorageArea.clear(function(){
+  chrome.storage.local.clear(function(){
     console.log("所有键值对都被清除!");
   });
+  initView(); // 刷新视图
 }
 
 function removeHeader(key) {
-  chrome.storage.StorageArea.remove(key, function(){
+  chrome.storage.local.remove(key, function(){
     console.log("键值对", key, "被清除!");
   });
 }
@@ -57,4 +67,9 @@ submit.addEventListener("click", function(){
   button_key = document.getElementById("button_key");
   button_value = document.getElementById("button_value");
   button_submit.onclick = saveUserConfig(button_key.value, button_value.value);
+});
+
+var submit = document.getElementById("button_clear");
+submit.addEventListener("click", function(){
+  clearAllHeaders();
 });
