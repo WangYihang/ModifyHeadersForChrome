@@ -1,4 +1,13 @@
 function saveUserConfig(key, value) {
+  // 判断空
+  if(key == ""){
+    alert("键不能为空");
+    return;
+  }
+  if(value == ""){
+    alert("值不能为空");
+    return;
+  }
   // 使用 Chrome 扩展程序的存储 API 保存它。
   chrome.storage.local.set({[key]: value}, function() {
     // 通知保存完成。
