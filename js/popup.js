@@ -12,7 +12,7 @@ function initView() {
   clearTable();
   chrome.storage.local.get(null, function(results) {
     for(var result in results){
-      console.log("获取 : ", result, " -> ", results[result]); 
+      // console.log("获取 : ", result, " -> ", results[result]); 
       addHeadersToHTML(result, results[result]);
     } 
   });
@@ -24,6 +24,11 @@ function clearTable() {
   for(var i = trs.length - 1; i > 0; i--) {
     table.deleteRow(i);
   }
+}
+
+function deleteTableRow(row_number) {
+  var table = document.getElementById("table_result"); //获得表格
+  table.deleteRow(row_number);
 }
 
 function addHeadersToHTML(key, value) {
@@ -38,7 +43,7 @@ function addHeadersToHTML(key, value) {
   table.rows[row_number].cells[1].innerHTML = value;
   //插入操作
   table.rows[row_number].insertCell(2);
-  table.rows[row_number].cells[2].innerHTML = "<input type=\"submit\" value=\"删除\"/>";
+  table.rows[row_number].cells[2].innerHTML = "<input class=\"deleteHeader\" id=\"" + row_number + "\" type=\"submit\" value=\"删除\"/>";
 }
 
 function clearInput() {
@@ -73,3 +78,5 @@ var submit = document.getElementById("button_clear");
 submit.addEventListener("click", function(){
   clearAllHeaders();
 });
+
+
