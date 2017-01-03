@@ -1,36 +1,12 @@
-// function refreshUserConfigToView() {
-//   var keys = {};
-//   var results = {}
-//   chrome.storage.local.get(keys, function(result){results = result;console.log(result);});
-// }
-
-// // function saveUserConfig(key, value) {
-// //   var item = {[key]:value};
-// //   alert(item['dsa']);
-// //   chrome.storage.local.set(item);
-// //   // refreshUserConfigToView();
-// // }
-
-// function saveUserConfig(key, value) {
-//   // 使用 Chrome 扩展程序的存储 API 保存它。
-//   chrome.storage.local.set({[key]: value}, function() {
-//     // 通知保存完成。
-//     console.log({[key]: value});
-//   });
-//   chrome.storage.local.get(null, function(results) {
-//     for(var result in results){
-//       console.log("获取 : ", result, " -> ", results[result]);
-//     } 
-//   });
-// }
-
-// var submit = document.getElementById("button_submit");
-// submit.addEventListener("click", function(){
-//   button_key = document.getElementById("button_key");
-//   button_value = document.getElementById("button_value")
-//   button_submit.onclick = saveUserConfig(button_key.value, button_value.value);
-// });
-
+function saveUserConfig(key, value) {
+  // 使用 Chrome 扩展程序的存储 API 保存它。
+  chrome.storage.local.set({[key]: value}, function() {
+    // 通知保存完成。
+    console.log("已经保存 : ", key, value);
+  });
+  addHeadersToHTML(key, value);
+  clearInput();
+}
 
 function initView() {
   chrome.storage.local.get(null, function(results) {
@@ -40,7 +16,6 @@ function initView() {
     } 
   });
 }
-
 
 function addHeadersToHTML(key, value) {
   var table = document.getElementById("table_result"); //获得表格
@@ -54,4 +29,17 @@ function addHeadersToHTML(key, value) {
   table.rows[row_number].cells[1].innerHTML = value;
 }
 
+function clearInput() {
+  button_key = document.getElementById("button_key");
+  button_value = document.getElementById("button_value");
+  button_key.value = "";
+  button_value.value = "";
+}
+
 initView();
+var submit = document.getElementById("button_submit");
+submit.addEventListener("click", function(){
+  button_key = document.getElementById("button_key");
+  button_value = document.getElementById("button_value");
+  button_submit.onclick = saveUserConfig(button_key.value, button_value.value);
+});
